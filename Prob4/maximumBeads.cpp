@@ -48,26 +48,44 @@ int main()
         f[0] = beads.substr(0,i);
         f[1] = beads.substr(i,beads.size());
         line = f[1]+f[0];
+        char first = line[0];
+        char last = line[line.size()-1];
         for(int j=0;j<line.size();j++)
         {
-            if(line[j]==line[0] | line[j]=='w')
+            if(first!='w')
             {
-                cnt_left++;
+                if(line[j]==first | line[j]=='w') //need justify the first item is 'w' or not 
+                {
+                    cnt_left++;
+                }
+                else
+                {
+                    break;
+                }
             }
-            else
-            {
-                break;
+            else{
+                first = line[j];
+                cnt_left++;
+                continue;
             }
         }
         for(int k=line.size()-1;k>=cnt_left;k--)
         {
-            if(line[k]==line[len-1] | line[k]=='w')
+            if(last!='w')
             {
-                cnt_right++;
+                if(line[k]==last | line[k]=='w')
+                {
+                    cnt_right++;
+                }
+                else
+                {
+                    break;
+                }
             }
-            else
-            {
-                break;
+            else{
+                last = line[k];
+                cnt_right++;
+                continue;
             }
         }
         if(cnt < cnt_left + cnt_right)
